@@ -53,7 +53,12 @@ const Customizer = () => {
     try {
       setGeneratingImg(true);
 
-      const response = await fetch('http://localhost:8080/api/v1/dalle', {
+      // Use environment-specific backend URL
+      const backendUrl = import.meta.env.PROD 
+        ? config.production.backendUrl 
+        : config.development.backendUrl;
+
+      const response = await fetch(backendUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -63,11 +68,15 @@ const Customizer = () => {
         })
       })
 
-      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
+      const data = await response.json();
       handleDecals(type, `data:image/png;base64,${data.photo}`)
     } catch (error) {
-      alert(error)
+      console.error('AI Generation Error:', error);
+      alert('AI image generation is currently unavailable. Please try uploading an image instead.');
     } finally {
       setGeneratingImg(false);
       setActiveEditorTab("");

@@ -10,8 +10,15 @@ const CanvasModel = () => {
     <Canvas
       shadows
       camera={{ position: [0, 0, 0], fov: 25 }}
-      gl={{ preserveDrawingBuffer: true }}
+      gl={{ 
+        preserveDrawingBuffer: true,
+        antialias: true,
+        alpha: true
+      }}
       className="w-full max-w-full h-full transition-all ease-in"
+      onCreated={({ gl }) => {
+        gl.setClearColor('#f0f0f0', 0);
+      }}
     >
       <ambientLight intensity={0.5} />
       <Environment preset="city" />
