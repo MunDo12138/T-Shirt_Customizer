@@ -6,9 +6,6 @@ import { Decal, useGLTF, useTexture } from '@react-three/drei';
 
 import state from '../store';
 
-// Preload the 3D model
-useGLTF.preload('/shirt_baked.glb');
-
 const Shirt = () => {
   const snap = useSnapshot(state);
   const { nodes, materials } = useGLTF('/shirt_baked.glb');
@@ -23,10 +20,6 @@ const Shirt = () => {
   });
 
   const stateString = JSON.stringify(snap);
-
-  if (!nodes.T_Shirt_male || !materials.lambert1) {
-    return null; // Return null if model hasn't loaded yet
-  }
 
   return (
     <group key={stateString}>

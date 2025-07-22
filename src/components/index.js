@@ -5,6 +5,8 @@ import FilePicker from "./FilePicker";
 import Tab from "./Tab";
 import ErrorBoundary from "./ErrorBoundary";
 import LoadingSpinner from "./LoadingSpinner";
+import CanvasErrorBoundary from "./CanvasErrorBoundary";
+import ThreeErrorBoundary from "./ThreeErrorBoundary";
 
 export { 
   CustomButton,
@@ -14,4 +16,6 @@ export {
   Tab,
   ErrorBoundary,
   LoadingSpinner,
+  CanvasErrorBoundary,
+  ThreeErrorBoundary,
 };
